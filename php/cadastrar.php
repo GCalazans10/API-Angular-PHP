@@ -4,7 +4,7 @@
 include("conexao.php");
 
 //Obter Dados
-$obterDados =file_get_contents("php://imput");
+$obterDados =file_get_contents("php://input");
 
 //Extrair os dados do JSON
 $extrair = json_decode($obterDados);
@@ -22,6 +22,6 @@ $curso = [
     'nomeCurso' => $nomeCurso,
     'valorCurso' => $valorCurso
 ]
-json_encode([curso] => $curso);
+json_encode(['curso'] => $curso);
 
 ?>

@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms'; 
 import { AppComponent } from './app.component';
 import { CursoComponent } from './curso/curso.component';
+import { CursoService } from './curso/curso.service';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -14,8 +16,9 @@ import { CursoComponent } from './curso/curso.component';
     BrowserModule,
     HttpClientModule,
     FormsModule
+
   ],
-  providers: [],
+  providers: [HttpClientModule, CursoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
