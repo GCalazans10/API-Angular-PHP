@@ -1,7 +1,8 @@
+import { CursoService } from './curso.service';
 import { HttpClient } from '@angular/common/http';
+import { SelectorMatcher } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Curso } from './curso';
-import { CursoService } from './curso.service';
 
 @Component({
   selector: 'app-curso',
@@ -9,66 +10,37 @@ import { CursoService } from './curso.service';
   styleUrls: ['./curso.component.css']
 })
 export class CursoComponent implements OnInit {
-  
-  vetor: Curso[];
-constructor(private curso_servico: CursoService){}
- 
-ngOnInit() {  
-  this.selecao();
-  
-}
- 
-selecao(){
+
+  vetor!: Curso[];
+
+  curso = new Curso();
+
+  constructor(private curso_servico:CursoService) {}
+
+
+
+  ngOnInit(): void {
+    this.selecao();
+  }
+  //Cadastro
+  cadastro():void{
+    alert("Cadastro");
+  }
+  //Seceção
+  selecao(){
     this.curso_servico.obterCursos().subscribe(
-      (res:Curso[]) =>{
+      (res: Curso[]) =>{
         this.vetor = res;
-      }  )
+      }
+    )
+  }
+  //Alterar
+  alterar():void{
+    alert("alterar");
+  }
+    //Cadastro
+  remover():void{
+    alert("remover");
 
+  }
 }
-cadastro(){
-    this.curso_servico.cadastrarCurso(this.curso).subscribe(
-       (res: Curso[])=> {
-        //Adiciona dados ao vetor
-        this.vetor = res;
-        //Limpa os atributos
-        this.curso.nomeCurso = null
-        this.curso.valorCurso = null
-
-        //Atualizar a listagem
-        this.selecao();
-
-       }
-    )
-  }
-remover(){
-      this.curso_servico.removerCurso(this.curso).subscribe(
-          (res : Curso[]) =>{
-       this.vetor = res;
-       this.curso.nomeCurso = null;
-       this.curso.valorCurso = null;
-      }
-    )
-  }
-selecionarCurso(c:Curso){
-    this.curso.idCurso = c.idCurso;
-    this.curso.nomeCurso = c.nomeCurso;
-    this.curso.valorCurso = c.valorCurso;
-  }
-
-    alterar(){
-    this.curso_servico.atualizarCurso(this.curso).subscribe(
-      (res) => {
-        //Atualizar Vetor
-        this.vetor =res;
-        //Limpar os valores do objeto
-        this.curso.nomeCurso= null;
-        this.curso.valorCurso= null;
-        //Atualiza a Listagem
-        this.selecao();
-      }
-    )
-  }
-  }
-
-
- 
